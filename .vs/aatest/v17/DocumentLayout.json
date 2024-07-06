@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|solutionrelative:aatest\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|d:\\work\\aa-test\\aatest\\aatest\\aatest.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|solutionrelative:aatest\\aatest.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|d:\\work\\aa-test\\aatest\\aatest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|solutionrelative:aatest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -20,10 +24,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|d:\\work\\aa-test\\aatest\\aatest\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|solutionrelative:aatest\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|d:\\work\\aa-test\\aatest\\aatest\\aatest.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{B7FEE138-3E35-485C-BDB5-2C311D8501C2}|aatest\\aatest.csproj|solutionrelative:aatest\\aatest.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,15 +33,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "secrets.json",
               "DocumentMoniker": "C:\\Users\\datorz\\AppData\\Roaming\\Microsoft\\UserSecrets\\6f358213-7fca-4024-8b9e-fde61a98a37b\\secrets.json",
               "ToolTip": "C:\\Users\\datorz\\AppData\\Roaming\\Microsoft\\UserSecrets\\6f358213-7fca-4024-8b9e-fde61a98a37b\\secrets.json",
@@ -51,7 +55,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\Work\\AA-test\\aatest\\aatest\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "aatest\\Properties\\launchSettings.json",
@@ -63,14 +67,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "aatest",
               "DocumentMoniker": "D:\\Work\\AA-test\\aatest\\aatest\\aatest.csproj",
               "RelativeDocumentMoniker": "aatest\\aatest.csproj",
               "ToolTip": "D:\\Work\\AA-test\\aatest\\aatest\\aatest.csproj",
               "RelativeToolTip": "aatest\\aatest.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-06T11:10:37.282Z"
+              "WhenOpened": "2024-07-06T11:10:37.282Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -80,14 +85,14 @@
               "RelativeDocumentMoniker": "aatest\\Controllers\\CarController.cs",
               "ToolTip": "D:\\Work\\AA-test\\aatest\\aatest\\Controllers\\CarController.cs",
               "RelativeToolTip": "aatest\\Controllers\\CarController.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAqwCEAAAApAAAA",
+              "ViewState": "AQIAADYAAAAAAAAAAAAIwD8AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-06T10:59:59.709Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Work\\AA-test\\aatest\\aatest\\appsettings.json",
               "RelativeDocumentMoniker": "aatest\\appsettings.json",
@@ -99,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Work\\AA-test\\aatest\\aatest\\Program.cs",
               "RelativeDocumentMoniker": "aatest\\Program.cs",

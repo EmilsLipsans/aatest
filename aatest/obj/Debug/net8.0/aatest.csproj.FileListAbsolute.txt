@@ -141,3 +141,5 @@ D:\Work\AA-test\aatest\aatest\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspa
 D:\Work\AA-test\aatest\aatest\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Work\AA-test\aatest\aatest\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Work\AA-test\aatest\aatest\obj\Debug\net8.0\aatest.sourcelink.json
+D:\Work\AA-test\aatest\aatest\bin\Debug\net8.0\aatest.xml
+D:\Work\AA-test\aatest\aatest\obj\Debug\net8.0\aatest.xml

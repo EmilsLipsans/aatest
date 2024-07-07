@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>aatest</name>
+    </assembly>
+    <members>
+        <member name="M:aatest.Controllers.CarBrandController.GetCarBrands">
+            <summary>
+            Get all car brands.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarBrandController.CarBrandExists(System.Int32)">
+            <summary>
+            Check if car brand exists by id.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarBrandController.AddCarBrand(System.String)">
+            <summary>
+            Add car brand.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarBrandController.DeleteCarBrand(System.Int32)">
+            <summary>
+            Delete car brand.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarBrandController.EditCarBrand(aatest.Models.CarBrand)">
+            <summary>
+            Edit car brand.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarController.GetCars">
+            <summary>
+            Get all cars.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarController.GetCarsByBrand(System.Int32)">
+            <summary>
+            Get cars by brand id.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:aatest.Controllers.CarController.IsCarBrandUsed(System.Int32)">
+            <summary>
+            Check if brand id is used for any of the cars.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarController.AddCar(aatest.Models.Car)">
+            <summary>
+            Add a car.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarController.DeleteCar(System.Int32)">
+            <summary>
+            Delete a car.
+            </summary>
+        </member>
+        <member name="M:aatest.Controllers.CarController.EditCar(aatest.Models.Car)">
+            <summary>
+            Edit a car.
+            </summary>
+        </member>
+    </members>
+</doc>

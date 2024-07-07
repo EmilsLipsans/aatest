@@ -1,10 +1,14 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
+import { variables } from './Variables.js';
 
-export class Cars extends Component{
-    render(){
-        return(
+export class Cars extends Component {
+
+    
+    render() {
+        
+        return (
             <div>
-                <h3>This is my Cars page</h3>
+
             </div>
         )
     }

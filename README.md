@@ -1,4 +1,4 @@
-Create a local database(aadb) and execute these queries
+Setup: Create a local database(aadb) and execute these queries
 
   ```sql
   CREATE TABLE CarBrands (

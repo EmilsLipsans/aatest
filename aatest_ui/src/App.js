@@ -32,7 +32,7 @@ function App() {
           <Route path='/carbrands' element={<CarBrands />} />
         </Routes>
 
-        <footer className="footer mt-auto py-3 bg-light">
+        <footer className="footer mt-auto py-3">
           <div className="container d-flex justify-content-center">
             <span className="text-muted">Version 1.0.0</span>
           </div>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { variables } from './Variables.js';
+import './CarBrands.css';
+
 
 export class CarBrands extends Component {
 
@@ -8,18 +10,56 @@ export class CarBrands extends Component {
 
         this.state = {
             brands: [],
-            modalTitle: "",
-            brandId: 0,
-            brandName: ""
+            brandName: "",
+            isBrandChanged: false,
+            currentPage: 1, 
+            itemsPerPage: 7,
+            BrandIdFilter: "",
+            BrandNameFilter: "",
+            brandsNoFilter: [],
         }
     }
 
+    FilterBrands(data) {
+        const { BrandIdFilter, BrandNameFilter, brandsNoFilter } = this.state;
+
+        let filteredData = [];
+
+        if (data == null) {
+            filteredData = brandsNoFilter.filter(b => (
+                b.id.toString().toLowerCase().includes(BrandIdFilter.toString().trim().toLowerCase()) &&
+                b.brand_name.toString().toLowerCase().includes(BrandNameFilter.toString().trim().toLowerCase())
+            ));
+        } else {
+            filteredData = data.filter(b => (
+                b.id.toString().toLowerCase().includes(BrandIdFilter.toString().trim().toLowerCase()) &&
+                b.brand_name.toString().toLowerCase().includes(BrandNameFilter.toString().trim().toLowerCase())
+            ));
+            this.setState({ brandsNoFilter: data });
+        }
+
+        this.setState({ brands: filteredData });
+    }
+
+    changeBrandIdFilter = (e) => {
+        this.state.BrandIdFilter = e.target.value;
+        this.FilterBrands(null);
+    }
+    changeBrandNameFilter = (e) => {
+        this.state.BrandNameFilter = e.target.value;
+        this.FilterBrands(null);
+    }
 
     refreshList() {
         fetch(variables.API_URL + 'CarBrand/GetCarBrands')
             .then(response => response.json())
             .then(data => {
-                this.setState({ brands: data });
+                if (this.state.BrandIdFilter != "" || this.state.BrandNameFilter != "") {
+                    this.FilterBrands(data);
+                }
+                else {
+                    this.setState({ brandsNoFilter: data, brands: data });
+                }
             });
     }
 
@@ -33,17 +73,23 @@ export class CarBrands extends Component {
 
     addButton() {
         this.setState({
-            modalTitle: "Add Brand",
-            brandId: 0,
             brandName: ""
         });
     }
-    editClick(brand) {
-        this.setState({
-            modalTitle: "Edit Brand",
-            brandId: brand.id,
-            brandName: brand.brand_name
-        });
+
+    handleInputChange = (index) => (event) => {
+        const newBrands = [...this.state.brands];
+        newBrands[index] = { ...newBrands[index], brand_name: event.target.value };
+        this.setState({ brands: newBrands, isBrandChanged: true });
+    }
+
+    handleInputBlur = (index) => () => {
+        if (this.state.isBrandChanged) {
+            const brand = this.state.brands[index];
+            this.updateClick(brand)
+            this.setState({ isBrandChanged: false });
+        }
+
     }
 
     addClick() {
@@ -57,19 +103,18 @@ export class CarBrands extends Component {
                 'Accept': 'application/json',
             }
         })
-        .then(res => res.json())
-        .then(result => {
-            alert(result);
-            this.refreshList();
-        })
-        .catch(() => {
-            alert('Failed to add car brand.');
-        });
+            .then(res => res.json())
+            .then(result => {
+                alert(result);
+                this.refreshList();
+            })
+            .catch(() => {
+                alert('Failed to add car brand.');
+            });
     }
-    
-    updateClick() {
-        const { brandId, brandName } = this.state;
-    
+
+    updateClick(b) {
+
         fetch(variables.API_URL + 'CarBrand/EditCarBrand', {
             method: 'PUT',
             headers: {
@@ -77,24 +122,24 @@ export class CarBrands extends Component {
                 'Content-Type': 'application/json-patch+json'
             },
             body: JSON.stringify({
-                id: brandId,
-                name: brandName
+                id: b.id,
+                name: b.brand_name
             })
         })
-        .then(res => {
-            if (!res.ok) throw new Error('Network response was not ok');
-            return res.json();
-        })
-        .then(() => {
-            alert('Car brand updated successfully');
-            this.refreshList();
-        })
-        .catch(error => {
-            console.error('Error during fetch operation:', error);
-            alert('Failed to edit car brand.');
-        });
+            .then(res => {
+                if (!res.ok) throw new Error('Network response was not ok');
+                return res.json();
+            })
+            .then(() => {
+                alert('Car brand updated successfully');
+                this.refreshList();
+            })
+            .catch(error => {
+                console.error('Error during fetch operation:', error);
+                alert('Failed to edit car brand.');
+            });
     }
-     
+
     deleteClick(id) {
         if (window.confirm('Are you sure?')) {
             fetch(variables.API_URL + 'CarBrand/DeleteCarBrand/' + id, {
@@ -103,31 +148,48 @@ export class CarBrands extends Component {
                     'Accept': '*/*'
                 }
             })
-            .then(res => {
-                if (!res.ok) throw new Error('Network response was not ok');
-                alert('Car brand deleted successfully');
-                this.refreshList();
-            })
-            .catch(error => {
-                console.error('Error during fetch operation:', error);
-                alert('Failed to delete car brand.');
-            });
+                .then(res => {
+                    if (!res.ok) throw new Error('Network response was not ok');
+                    alert('Car brand deleted successfully');
+                    this.refreshList();
+                })
+                .catch(error => {
+                    console.error('Error during fetch operation:', error);
+                    alert('Failed to delete car brand.');
+                });
         }
     }
-    
+    paginateData = () => {
+        const { brands, currentPage, itemsPerPage } = this.state;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return brands.slice(startIndex, endIndex);
+    }
+
+    // Function to go to previous page
+    prevPage = () => {
+        this.setState(prevState => ({
+            currentPage: prevState.currentPage - 1
+        }));
+    }
+
+    // Function to go to next page
+    nextPage = () => {
+        this.setState(prevState => ({
+            currentPage: prevState.currentPage + 1
+        }));
+    }
     render() {
         const {
-            brands,
-            modalTitle,
-            brandId,
             brandName
         } = this.state;
+        const paginatedBrands = this.paginateData();
         return (
-            <div>
+            <div className='content full-height-container'>
                 <button type="button"
                     className="btn btn-primary m-2 float-end"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target="#addModal"
                     onClick={() => this.addButton()}>
                     Add Brand
                 </button>
@@ -135,32 +197,34 @@ export class CarBrands extends Component {
                     <thead>
                         <tr>
                             <th>
+                                <div className="d-flex flex-row">
+                                    <input className="form-control m-2"
+                                        onChange={this.changeBrandIdFilter}
+                                        placeholder="Filter by ID" />
+                                </div>
                                 Brand Id
                             </th>
                             <th>
-                                Brand Name
-                            </th>
-                            <th>
-                                Options
-                            </th>
+                                <div className="d-flex flex-row">
+                                    <input className="form-control m-2"
+                                        onChange={this.changeBrandNameFilter}
+                                        placeholder="Filter by Name" />
+                                </div>
+                                Brand Name</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {brands.map(b =>
+                        {paginatedBrands.map((b, index) =>
                             <tr key={b.id}>
                                 <td>{b.id}</td>
-                                <td>{b.brand_name}</td>
                                 <td>
-                                    <button type="button"
-                                        className="btn btn-light mr-1"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"
-                                        onClick={() => this.editClick(b)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
-                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                            <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                        </svg>
-                                    </button>
+                                    <input type="text" className="form-control"
+                                        value={b.brand_name}
+                                        onChange={this.handleInputChange(index)}
+                                        onBlur={this.handleInputBlur(index)} />
+                                </td>
+                                <td>
                                     <button type="button"
                                         className="btn btn-light mr-1"
                                         onClick={() => this.deleteClick(b.id)}>
@@ -173,36 +237,40 @@ export class CarBrands extends Component {
                         )}
                     </tbody>
                 </table>
-                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
+                <div className="justify-content-center py-1">
+                    <button className="btn btn-primary"
+                        onClick={this.prevPage}
+                        disabled={this.state.currentPage === 1}>
+                        Prev
+                    </button>
+                    <span className="mx-4">{`Page ${this.state.currentPage}`}</span>
+                    <button className="btn btn-primary"
+                        onClick={this.nextPage}
+                        disabled={paginatedBrands.length < this.state.itemsPerPage}>
+                        Next
+                    </button>
+                </div>
+                <div className="modal fade" id="addModal" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog modal-lg modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">{modalTitle}</h5>
+                                <h5 className="modal-title">Add Brand</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                 ></button>
                             </div>
 
                             <div className="modal-body">
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">BrandName</span>
+                                    <span className="input-group-text">Brand Name</span>
                                     <input type="text" className="form-control"
                                         value={brandName}
                                         onChange={this.changeBrandName} />
                                 </div>
-
-                                {brandId == 0 ?
-                                    <button type="button"
-                                        className="btn btn-primary float-start"
-                                        onClick={() => this.addClick()}>
-                                        Create</button>
-                                    : null}
-
-                                {brandId != 0 ?
-                                    <button type="button"
-                                        className="btn btn-primary float-start"
-                                        onClick={() => this.updateClick()}>
-                                        Update</button>
-                                    : null}
+                                <button type="button"
+                                    className="btn btn-primary float-start"
+                                    onClick={() => this.addClick()}>
+                                    Add
+                                </button>
                             </div>
                         </div>
                     </div>
